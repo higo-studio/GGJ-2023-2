@@ -33,7 +33,7 @@ jobs:
           lfs: true
       - uses: actions/cache@v2
         with:
-          path: hybrid-game/Library
+          path: Library
           key: Library-${{ matrix.targetPlatform }}
           restore-keys: Library-
       - uses: game-ci/unity-builder@v2.1.0
@@ -44,14 +44,13 @@ jobs:
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
           targetPlatform: ${{ matrix.targetPlatform }}
-          projectPath: "hybrid-game"
           versioning: Semantic
       
       #universal
       - name: Tar files
         if: matrix.targetPlatform != 'StandaloneOSX'
         env:
-          filename: hybrid-${{ steps.unityBuild.outputs.buildVersion }}-${{ matrix.targetPlatform }}
+          filename: roots-${{ steps.unityBuild.outputs.buildVersion }}-${{ matrix.targetPlatform }}
         run: |
           echo "out-filename=${filename}" >> $GITHUB_ENV
           echo "out-filename-with-ext=${filename}.zip" >> $GITHUB_ENV
@@ -62,7 +61,7 @@ jobs:
       - name: Tar files - Mac Only
         if: matrix.targetPlatform == 'StandaloneOSX'
         env:
-          filename: hybrid-${{ steps.unityBuild.outputs.buildVersion }}-${{ matrix.targetPlatform }}
+          filename: roots-${{ steps.unityBuild.outputs.buildVersion }}-${{ matrix.targetPlatform }}
         run: |
           echo "out-filename=${filename}" >> $GITHUB_ENV
           echo "out-filename-with-ext=${filename}.tar.gz" >> $GITHUB_ENV
