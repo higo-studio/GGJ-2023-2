@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d42357a4c537014381d1c3ae15c2aa7, type: 3}
+  m_Name: New Icon Collections
+  m_EditorClassIdentifier: 
+  Logo:
+    Xbox: {fileID: 21300000, guid: 58e41b6372577374985da52178191b7e, type: 3}
+    Switch: {fileID: 21300000, guid: 27a5b559b41e44d4080c8d5b1a9f5201, type: 3}
+    PlayStation: {fileID: 21300000, guid: e6d526ba5cda21949ad4b1ce512b4660, type: 3}
+  Up:
+    Xbox: {fileID: -1863589344, guid: dd5084642ea1f4455b4db186eabf090a, type: 3}
+    Switch: {fileID: -456887275, guid: dd5084642ea1f4455b4db186eabf090a, type: 3}
+    PlayStation: {fileID: 1632017085, guid: dd5084642ea1f4455b4db186eabf090a, type: 3}
+  Down:
+    Xbox: {fileID: 1997212759, guid: dd5084642ea1f4455b4db186eabf090a, type: 3}
+    Switch: {fileID: -41284345, guid: dd5084642ea1f4455b4db186eabf090a, type: 3}
+    PlayStation: {fileID: 43185543, guid: dd5084642ea1f4455b4db186eabf090a, type: 3}
+  Left:
+    Xbox: {fileID: -456887275, guid: dd5084642ea1f4455b4db186eabf090a, type: 3}
+    Switch: {fileID: -1863589344, guid: dd5084642ea1f4455b4db186eabf090a, type: 3}
+    PlayStation: {fileID: 1016868895, guid: dd5084642ea1f4455b4db186eabf090a, type: 3}
+  Right:
+    Xbox: {fileID: -41284345, guid: dd5084642ea1f4455b4db186eabf090a, type: 3}
+    Switch: {fileID: 1997212759, guid: dd5084642ea1f4455b4db186eabf090a, type: 3}
+    PlayStation: {fileID: -1857437007, guid: dd5084642ea1f4455b4db186eabf090a, type: 3}
+  Start:
+    Xbox: {fileID: 180058267, guid: dd5084642ea1f4455b4db186eabf090a, type: 3}
+    Switch: {fileID: 1225435290, guid: dd5084642ea1f4455b4db186eabf090a, type: 3}
+    PlayStation: {fileID: -934202259, guid: dd5084642ea1f4455b4db186eabf090a, type: 3}
