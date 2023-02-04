@@ -11,6 +11,7 @@ public struct IconPlatformMapper
     public Sprite Xbox;
     public Sprite Switch;
     public Sprite PlayStation;
+    public Sprite KeyBoardWASD;
 }
 
 public enum eIconType

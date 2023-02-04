@@ -49,8 +49,17 @@ public class PlatformIcon : MonoBehaviour
                     case "Xbox Controller":
                         sprite = mapper.Xbox;
                         break;
-                    default:
+                    case "Keyboard":
+                        sprite = mapper.KeyBoardWASD;
+                        break;
+                    case "PlayStation Controller":
                         sprite = mapper.PlayStation;
+                        break;
+                    case "Switch Pro Controller":
+                        sprite = mapper.Switch;
+                        break;
+                    default:
+                        sprite = mapper.KeyBoardWASD;
                         break;
                 }
             }

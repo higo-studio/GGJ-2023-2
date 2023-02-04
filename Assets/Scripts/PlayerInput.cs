@@ -16,6 +16,7 @@ public class PlayerInput : MonoBehaviour, IGameplayActions
     private Coroutine m_vibrateCor;
     public event Action<InputAction.CallbackContext> OnKeyChanged;
     public static string s_LastDeviceDisplayName;
+    public static string s_LastDeviceSubType;
     public static event Action OnLastInputChanged;
 
     protected void OnEnable()
@@ -72,36 +73,35 @@ public class PlayerInput : MonoBehaviour, IGameplayActions
 
     public void OnStart(InputAction.CallbackContext context)
     {
-        OnKeyChanged?.Invoke(context);
-        s_LastDeviceDisplayName = context.control.device.displayName;
-        OnLastInputChanged?.Invoke();
+        OnCommand(context);
     }
 
     public void OnUp(InputAction.CallbackContext context)
     {
-        OnKeyChanged?.Invoke(context);
-        s_LastDeviceDisplayName = context.control.device.displayName;
-        OnLastInputChanged?.Invoke();
+        OnCommand(context);
     }
 
     public void OnDown(InputAction.CallbackContext context)
     {
-        OnKeyChanged?.Invoke(context);
-        s_LastDeviceDisplayName = context.control.device.displayName;
-        OnLastInputChanged?.Invoke();
+        OnCommand(context);
     }
 
     public void OnLeft(InputAction.CallbackContext context)
     {
-        OnKeyChanged?.Invoke(context);
-        s_LastDeviceDisplayName = context.control.device.displayName;
-        OnLastInputChanged?.Invoke();
+        OnCommand(context);
     }
 
     public void OnRight(InputAction.CallbackContext context)
     {
+        OnCommand(context);
+    }
+
+    public void OnCommand(InputAction.CallbackContext context)
+    {
         OnKeyChanged?.Invoke(context);
-        s_LastDeviceDisplayName = context.control.device.displayName;
+
+        var device = context.control.device;
+        s_LastDeviceDisplayName = device.displayName;
         OnLastInputChanged?.Invoke();
     }
 }
