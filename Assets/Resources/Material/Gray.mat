@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: New Material 1
+  m_Name: Gray
   m_Shader: {fileID: -6465566751694194690, guid: f8db2400b814143e08fbb061c4aa2f1f, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
