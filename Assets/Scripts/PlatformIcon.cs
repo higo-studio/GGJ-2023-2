@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Image))]
-[ExecuteAlways]
 public class PlatformIcon : MonoBehaviour
 {
     private Image m_image;
@@ -57,6 +56,7 @@ public class PlatformIcon : MonoBehaviour
                         sprite = mapper.Xbox;
                         break;
                     case "Keyboard":
+                    case "Mouse":
                         sprite = mapper.KeyBoardWASD;
                         break;
                     case "PlayStation Controller":

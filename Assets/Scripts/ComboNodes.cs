@@ -16,6 +16,7 @@ public class ComboNodes : MonoBehaviour
     {
         nodes = new List<QTENode>(NodesContainer.GetComponentsInChildren<QTENode>());
         inputNodes = new List<QTENode>(InputNodesContainer.GetComponentsInChildren<QTENode>());
+        Hide();
     }
 
     public void Show(List<EmQTE> targets)
