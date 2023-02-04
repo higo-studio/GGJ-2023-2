@@ -38,7 +38,7 @@ public class PlatformIcon : MonoBehaviour
         PlayerInput.OnLastInputChanged -= Refresh;
     }
 
-    public void Refresh()
+    public async void Refresh()
     {
         if (m_image == null) return;
         // if (m_cacheDeviceName == PlayerInput.s_LastDeviceDisplayName && m_cacheIconType == m_cacheIconType) return;
@@ -82,6 +82,14 @@ public class PlatformIcon : MonoBehaviour
         if (iconCollections.Map.TryGetValue(m_iconType, out var mapper))
             sprite = mapper.KeyBoardWASD;
         m_image.sprite = sprite;
+        if (sprite != null)
+        {
+            float w = sprite.rect.width / sprite.pixelsPerUnit;
+            float h = sprite.rect.height / sprite.pixelsPerUnit;
+            var scalar = m_image.rectTransform.sizeDelta.y / h;
+            m_image.rectTransform.anchorMax = m_image.rectTransform.anchorMin;
+            m_image.rectTransform.sizeDelta = new Vector2(w * scalar, h * scalar);
+        }
     }
 #if UNITY_EDITOR
     void OnValidate()
