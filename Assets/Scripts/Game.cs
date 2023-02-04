@@ -16,6 +16,7 @@ public class Game : MonoBehaviour
     public VineManager vineManager;
     public ComboNodes comboNodes;
     public LabelCD remainCD;
+    public LabelComboTime remainCombo;
 
     public Game()
     {
@@ -43,6 +44,8 @@ public class Game : MonoBehaviour
     public void OnStartBombo()
     {
         comboNodes.Show(GetQTEList());
+        vineManager.TimeOut();
+        ShowRemainCombo();
     }
 
     public void OnComboFinish(int damege)
@@ -50,11 +53,14 @@ public class Game : MonoBehaviour
         comboNodes.Hide();
         qteManager.CutQte(damege);
         vineManager.Cut(damege);
+        // TODO Animation Callback stop
+        vineManager.Resume(true);
     }
 
     public void OnComboFail()
     {
         comboNodes.Hide();
+        vineManager.Resume();
     }
 
     public void OnInputCombo(EmQTE qte)
@@ -70,9 +76,19 @@ public class Game : MonoBehaviour
         }
     }
 
+    public void ShowRemainCombo()
+    {
+        if (remainCombo != null)
+        {
+            remainCombo.SetActive(true);
+        }
+    }
+
     public bool isComboCD { get { return qteManager.isWaitingCD; } }
+    public bool isComboing { get { return qteManager.isComboing; } }
 
     public float comboRemainCDTime { get { return qteManager.remainCdTime; } }
+    public float comboRemainTime { get { return qteManager.remainComboTime; } }
 
     public void OnBornNewVine()
     {

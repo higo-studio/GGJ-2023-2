@@ -41,14 +41,19 @@ public class VineManager: MonoBehaviour
         }
     }
 
-    public void TimeOuyt() 
-    { 
+    private float oldTime;
+    public void TimeOut()
+    {
         timeOut = true;
+        oldTime = currBornTime;
+        currBornTime = 0;
         vineList.ForEach(vine => vine.TimeOut());
     }
 
-    public void Resume()
+    public void Resume(bool reset = false)
     {
+        if (!reset)
+            currBornTime = oldTime;
         timeOut = false;
         vineList.ForEach(vine => vine.Resume());
     }

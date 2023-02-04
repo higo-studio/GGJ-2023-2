@@ -29,7 +29,9 @@ public class QTEManager: MonoBehaviour
     [Header("������CDʱ��")]
     public float CdTime = 100.0f;
     private float currCdTime = 0.0f;
+    private float currComboTime = 0.0f;
     public float remainCdTime { get { return Math.Clamp(CdTime - currCdTime, 0, CdTime); } }
+    public float remainComboTime { get { return Math.Clamp(ComboTime - currComboTime, 0, ComboTime); } }
 
     public List<EmQTE> qteList { get; private set; }
     public List<EmQTE> inputList { get; private set; }
@@ -84,8 +86,20 @@ public class QTEManager: MonoBehaviour
     {
         checkIndex = -1;
         isComboing = true;
-        Invoke(nameof(ComboTimeOut), ComboTime);
+        currComboTime = 0;
+        StartCoroutine("CuntCombo");
         game.OnStartBombo();
+    }
+
+    private IEnumerator CuntCombo()
+    {
+        while (isComboing && currComboTime < ComboTime)
+        {
+            currComboTime += Time.deltaTime;
+            yield return null;
+        }
+        currComboTime = 0;
+        ComboTimeOut();
     }
 
     private void ComboTimeOut()
