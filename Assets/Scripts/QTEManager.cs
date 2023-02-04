@@ -28,7 +28,8 @@ public class QTEManager: MonoBehaviour
     public float ComboTime = 2.0f;
     [Header("连打后的CD时间")]
     public float CdTime = 100.0f;
-    public float currCdTime { get; private set; } = 0.0f;
+    private float currCdTime = 0.0f;
+    public float remainCdTime { get { return Math.Clamp(CdTime - currCdTime, 0, CdTime); } }
 
     public List<EmQTE> qteList { get; private set; }
     public List<EmQTE> inputList { get; private set; }
@@ -36,7 +37,8 @@ public class QTEManager: MonoBehaviour
     public bool isValid { get; private set; }
     public bool isComboing { get; private set; }
     public bool isWaitingCD { get; private set; }
-
+    private Game game;
+    private System.Random random;
 
     private QTEManager() {
         //qteList = new ArrayList();
@@ -48,17 +50,28 @@ public class QTEManager: MonoBehaviour
         };
         inputList = new List<EmQTE>();
         isValid = true;
+        random = new System.Random();
     }
 
+    public void SetGameInstance(Game instance)
+    {
+        game = instance;
+    }
 
     public void GenerateQte()
     {
-
+        int qte = random.Next(0, 4);
+        qteList.Add((EmQTE)qte);
     }
 
     public void RefreshQte()
     {
-
+        var count = qteList.Count;
+        qteList.Clear();
+        for(int i = 0; i < count; i++)
+        {
+            GenerateQte();
+        }
     }
 
     public void CutQte(int cutNum)
@@ -70,6 +83,7 @@ public class QTEManager: MonoBehaviour
         {
             qteList.RemoveRange(0, cutNum);
         }
+        RefreshQte();
     }
 
     private void StartCombo()
@@ -77,7 +91,7 @@ public class QTEManager: MonoBehaviour
         checkIndex = -1;
         isComboing = true;
         Invoke(nameof(ComboTimeOut), ComboTime);
-        Game.instance.OnStartBombo();
+        game.OnStartBombo();
     }
 
     private void ComboTimeOut()
@@ -93,18 +107,19 @@ public class QTEManager: MonoBehaviour
     {
         isValid = false;
         isWaitingCD = true;
-        this.currCdTime = 0;
+        currCdTime = 0;
         //Invoke(nameof(CDTimeOut), CdTime);
-        StartCoroutine(nameof(CuntCd));
+        StartCoroutine("CuntCd");
+        game.ShowRemainCD();
     }
 
 
-    public IEnumerable CuntCd()
+    public IEnumerator CuntCd()
     {
         while(currCdTime < CdTime)
         {
             currCdTime += Time.deltaTime;
-            yield return new WaitForEndOfFrame();
+            yield return null;
         }
         currCdTime = 0;
         CDTimeOut();
@@ -140,8 +155,12 @@ public class QTEManager: MonoBehaviour
             return;
         }
         if (checkIndex >= qteList.Count || (EmQTE)qteList[checkIndex] != (EmQTE)inputList[inputList.Count - 1])
+        {
             ComboFail();
+            return;
+        }
         checkIndex++;
+        game.OnInputCombo((EmQTE)inputList[inputList.Count - 1]);
     }
 
     private void ComboFail()
@@ -149,6 +168,7 @@ public class QTEManager: MonoBehaviour
         isComboing = false;
         inputList.Clear();
         StartCd();
+        game.OnComboFail();
         Debug.Log("Fail");
     }
 
@@ -158,7 +178,8 @@ public class QTEManager: MonoBehaviour
         int comboLenth = Math.Max(inputList.Count - 2, 0);       
         inputList.Clear();
         StartCd();                                               
-        RefreshQte();
+        //RefreshQte();
+        game.OnComboFinish(comboLenth);
     }
 
     public void DebugLog()
