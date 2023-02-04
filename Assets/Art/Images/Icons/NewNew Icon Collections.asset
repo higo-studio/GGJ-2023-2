@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d42357a4c537014381d1c3ae15c2aa7, type: 3}
+  m_Name: NewNew Icon Collections
+  m_EditorClassIdentifier: 
+  Logo:
+    Xbox: {fileID: 21300000, guid: 58e41b6372577374985da52178191b7e, type: 3}
+    Switch: {fileID: 21300000, guid: 27a5b559b41e44d4080c8d5b1a9f5201, type: 3}
+    PlayStation: {fileID: 21300000, guid: e6d526ba5cda21949ad4b1ce512b4660, type: 3}
+    KeyBoardWASD: {fileID: 21300000, guid: f0b6a36c945abaa48b3ba9eb519010e9, type: 3}
+  Up:
+    Xbox: {fileID: 1386888397, guid: 90acaa69b159d4e9080727c7c4bf5296, type: 3}
+    Switch: {fileID: -1812111627, guid: 90acaa69b159d4e9080727c7c4bf5296, type: 3}
+    PlayStation: {fileID: -2124410355, guid: 90acaa69b159d4e9080727c7c4bf5296, type: 3}
+    KeyBoardWASD: {fileID: -1747664539, guid: 90acaa69b159d4e9080727c7c4bf5296, type: 3}
+  Down:
+    Xbox: {fileID: 894314568, guid: 90acaa69b159d4e9080727c7c4bf5296, type: 3}
+    Switch: {fileID: 1975641584, guid: 90acaa69b159d4e9080727c7c4bf5296, type: 3}
+    PlayStation: {fileID: -182321831, guid: 90acaa69b159d4e9080727c7c4bf5296, type: 3}
+    KeyBoardWASD: {fileID: -825324654, guid: 90acaa69b159d4e9080727c7c4bf5296, type: 3}
+  Left:
+    Xbox: {fileID: -2053398422, guid: 90acaa69b159d4e9080727c7c4bf5296, type: 3}
+    Switch: {fileID: 1430602172, guid: 90acaa69b159d4e9080727c7c4bf5296, type: 3}
+    PlayStation: {fileID: 1363933928, guid: 90acaa69b159d4e9080727c7c4bf5296, type: 3}
+    KeyBoardWASD: {fileID: 1498270435, guid: 90acaa69b159d4e9080727c7c4bf5296, type: 3}
+  Right:
+    Xbox: {fileID: -1302505402, guid: 90acaa69b159d4e9080727c7c4bf5296, type: 3}
+    Switch: {fileID: 924241964, guid: 90acaa69b159d4e9080727c7c4bf5296, type: 3}
+    PlayStation: {fileID: -23566444, guid: 90acaa69b159d4e9080727c7c4bf5296, type: 3}
+    KeyBoardWASD: {fileID: 1171050951, guid: 90acaa69b159d4e9080727c7c4bf5296, type: 3}
+  Start:
+    Xbox: {fileID: 1151603091, guid: 90acaa69b159d4e9080727c7c4bf5296, type: 3}
+    Switch: {fileID: -445199908, guid: 90acaa69b159d4e9080727c7c4bf5296, type: 3}
+    PlayStation: {fileID: -602790514, guid: 90acaa69b159d4e9080727c7c4bf5296, type: 3}
+    KeyBoardWASD: {fileID: 1708927979, guid: 90acaa69b159d4e9080727c7c4bf5296, type: 3}

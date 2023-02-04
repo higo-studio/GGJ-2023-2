@@ -2,9 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(PlatformIcon))]
 public class QTENode : MonoBehaviour
 {
     public EmQTE value { get; private set; }
+    private PlatformIcon icon;
+
+    public void Awake()
+    {
+        icon = GetComponent<PlatformIcon>();
+    }
 
     public void Clear()
     {
@@ -15,6 +22,7 @@ public class QTENode : MonoBehaviour
     public void SetData(EmQTE qte)
     {
         value = qte;
+        icon.IconType = (eIconType)value;
         gameObject.SetActive(true);
     }
 

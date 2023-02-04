@@ -49,6 +49,7 @@ public class Game : MonoBehaviour
     {
         comboNodes.Hide();
         qteManager.CutQte(damege);
+        vineManager.Cut(damege);
     }
 
     public void OnComboFail()
@@ -72,4 +73,23 @@ public class Game : MonoBehaviour
     public bool isComboCD { get { return qteManager.isWaitingCD; } }
 
     public float comboRemainCDTime { get { return qteManager.remainCdTime; } }
+
+    public void OnBornNewVine()
+    {
+        if(vineManager.VineCountOver)
+        {
+            // TODO
+            CheckGameOver();
+        }
+        qteManager.GenerateQte();
+    }
+
+    public void CheckGameOver()
+    {
+        if(vineManager.VineCountOver)
+        {
+            Debug.Log("À¿¡À");
+            UnityEditor.EditorApplication.isPlaying= false;
+        }
+    }
 }

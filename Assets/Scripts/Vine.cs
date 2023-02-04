@@ -4,12 +4,17 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+public enum EmVineState
+{
+    None, Borning, Idle, Dying
+}
+
 public class Vine : SmartActor
 {
-    public Tower theTower;//
+    private Tower theTower;//
     
 
-    public float CommonCoolTime = 2;//攻击时间间隔
+    private float CommonCoolTime = 2;//攻击时间间隔
    
     private Boss2State IdleState = null;
     private Boss2State attackSate = null;
@@ -20,6 +25,7 @@ public class Vine : SmartActor
     public float targetTime;
     //private Hero hero = null;
 
+    /*
     public override void Start()
     {
         base.Start();
@@ -33,10 +39,11 @@ public class Vine : SmartActor
         cut= new int[num];//初始化藤曼
         
     }
-
+    */
    
 
 
+    /*
     // Update is called once per frame
     public override void Update()
     {
@@ -44,6 +51,7 @@ public class Vine : SmartActor
         UpdateState(Time.deltaTime);
       
     }
+    */
 
 
 
@@ -131,6 +139,46 @@ public class Vine : SmartActor
         }
     }
 
+
+
+    //////////////////////////////////////////////////////// 分割 paoMian //////////////////////////////////////////////////////////////
+
+    public EmVineState state { get; private set; }
+
+    public void Clear()
+    {
+        state = EmVineState.None;
+        gameObject.SetActive(false);
+    }
+
+    public void BeenBorn()
+    {
+        state = EmVineState.Borning;
+        gameObject.SetActive(true);
+        // TODO Animation
+    }
+
+    public void Idle()
+    {
+        state = EmVineState.Idle;
+    }
+
+    public void BeenSlay()
+    {
+        state = EmVineState.Dying;
+        // TODO  callback  ( Animation    to None    gameObject.SetActive )
+        gameObject.SetActive(false);
+    }
+
+    public void TimeOut()
+    {
+
+    }
+
+    public void Resume()
+    {
+
+    }
 }
 
 
