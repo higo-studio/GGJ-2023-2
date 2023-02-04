@@ -610,8 +610,9 @@ GameObject:
   - component: {fileID: 2054846170}
   - component: {fileID: 2054846169}
   - component: {fileID: 2054846174}
+  - component: {fileID: 2054846175}
   m_Layer: 0
-  m_Name: QTEManager
+  m_Name: Game
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -834,3 +835,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ComboTime: 2
   CdTime: 2
+--- !u!114 &2054846175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2054846168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 588fd63d631fa4449972140cf4643ebe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

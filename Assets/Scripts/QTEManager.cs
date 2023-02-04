@@ -29,9 +29,9 @@ public class QTEManager: MonoBehaviour
     [Header("连打后的CD时间")]
     public float CdTime = 100.0f;
 
-    public ArrayList qteList;                // 需要连打的队列
-    public ArrayList inputList;              // 玩家输入的连打队列
-    private int checkIndex;                  // qteList index
+    public ArrayList qteList;                
+    public ArrayList inputList;              
+    private int checkIndex;                  
     public bool isValid { get; private set; }
     public bool isComboing { get; private set; }
     public bool isWaitingCD { get; private set; }
@@ -138,9 +138,9 @@ public class QTEManager: MonoBehaviour
     private void FinishCombo()
     {
         isComboing = false;
-        int comboLenth = Math.Max(inputList.Count - 2, 0);       // TODO  算伤害有用
+        int comboLenth = Math.Max(inputList.Count - 2, 0);       
         inputList.Clear();
-        StartCd();                                               // TODO  应该要等动画播完再开始，为了测试不卡流程这里先调用
+        StartCd();                                               
         RefreshQte();
     }
 

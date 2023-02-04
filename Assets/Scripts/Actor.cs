@@ -4,9 +4,9 @@ using UnityEngine;
 
 public enum ActorType
 {
-    None,//Í¨ÓÃ
+    None,//Í¨ï¿½ï¿½
     Vine,
-    Tower,//boss ÊÖ
+    Tower,//boss ï¿½ï¿½
     Hero,
    
 }
@@ -37,7 +37,7 @@ public  class Actor : MonoBehaviour
 
    
 
-    //Ä³¸öactorµÄ²¿·Ö
+    //Ä³ï¿½ï¿½actorï¿½Ä²ï¿½ï¿½ï¿½
    
     public virtual void Update()
     {
