@@ -10,12 +10,14 @@ public class Vine : SmartActor
     
 
     public float CommonCoolTime = 2;//攻击时间间隔
+   
     private Boss2State IdleState = null;
     private Boss2State attackSate = null;
     private Boss2State currentState = null;
-
-    
-
+    private int[] cut;
+    public int num = 0;//藤曼段数
+    private float passedTime; // default 0
+    public float targetTime;
     //private Hero hero = null;
 
     public override void Start()
@@ -27,6 +29,9 @@ public class Vine : SmartActor
         IdleState = new IdleBoss2State(this);
         attackSate = new AttackBoss2State(this);
         currentState = IdleState;
+        
+        cut= new int[num];//初始化藤曼
+        
     }
 
    
@@ -40,14 +45,51 @@ public class Vine : SmartActor
       
     }
 
- 
 
-   /* public override void Damage()
-    {
-       
-    }*/
+
+    /* public override void Damage()
+     {
+
+     }*/
 
    
+    private void grow()
+    {
+        if (passedTime > targetTime)
+        {
+            //  put function here
+
+            num++;
+
+            //
+            passedTime = 0; //enter next loop
+        }
+        passedTime += Time.deltaTime;
+
+        
+    }
+    private void becut(int numofsame)//返回正确的数量
+    {
+        while (numofsame >= 0)
+        {
+            num--;
+            numofsame--;
+        }
+
+    }
+    private int[] cuting()
+    {
+        int damage = 0;
+        while(num>=damage)
+        {
+            damage++;
+            cut[damage] = Random.Range(1, 5);//1234对应四个键
+
+        }
+        return cut;
+    }
+    
+
     private class Boss2State
     {
         protected Animator animator
@@ -67,7 +109,10 @@ public class Vine : SmartActor
 
         }
     }
-
+    private void FixedUpdate()
+    {
+        grow();
+    }
     //boss 待机
     private class IdleBoss2State : Boss2State
     {
