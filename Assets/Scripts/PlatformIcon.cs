@@ -40,7 +40,7 @@ public class PlatformIcon : MonoBehaviour
     public void Refresh()
     {
         if (m_image == null) return;
-        if (m_cacheDeviceName == PlayerInput.s_LastDeviceDisplayName && m_cacheIconType == m_cacheIconType) return;
+        // if (m_cacheDeviceName == PlayerInput.s_LastDeviceDisplayName && m_cacheIconType == m_cacheIconType) return;
 
         m_cacheDeviceName = PlayerInput.s_LastDeviceDisplayName;
         m_cacheIconType = m_cacheIconType;

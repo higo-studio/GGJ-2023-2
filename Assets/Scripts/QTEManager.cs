@@ -46,7 +46,9 @@ public class QTEManager: MonoBehaviour
         {
             EmQTE.Left,
             EmQTE.Right,
-            EmQTE.Right
+            EmQTE.Right,
+            EmQTE.UP,
+            EmQTE.DOWN
         };
         inputList = new List<EmQTE>();
         isValid = true;

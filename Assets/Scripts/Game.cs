@@ -72,4 +72,19 @@ public class Game : MonoBehaviour
     public bool isComboCD { get { return qteManager.isWaitingCD; } }
 
     public float comboRemainCDTime { get { return qteManager.remainCdTime; } }
+
+    public void OnBornNewVine()
+    {
+        if(vineManager.VineCountOver)
+        {
+            // TODO
+            CheckGameOver();
+        }
+        qteManager.GenerateQte();
+    }
+
+    public void CheckGameOver()
+    {
+
+    }
 }

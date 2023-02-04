@@ -16,7 +16,7 @@ public struct IconPlatformMapper
 
 public enum eIconType
 {
-    Logo, Up, Down, Left, Right, Start
+    Logo = 5, Up = 0, Down = 1, Left = 2, Right = 3, Start = 4
 }
 
 [CreateAssetMenu]
