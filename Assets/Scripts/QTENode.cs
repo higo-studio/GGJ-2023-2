@@ -9,7 +9,7 @@ public class QTENode : MonoBehaviour
     public void Clear()
     {
         value = EmQTE.None;
-        enabled = false;
+        
     }
 
     public void SetData(EmQTE qte)
