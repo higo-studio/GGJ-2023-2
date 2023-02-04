@@ -5,37 +5,37 @@ using UnityEngine.Playables;
 
 public class ComboNodes : MonoBehaviour
 {
-    public Transform NodesContainer;
-    public Transform InputNodesContainer;
+    public GameObject NodesContainer;
+    //public Transform InputNodesContainer;
 
     private List<QTENode> nodes;
     private List<QTENode> inputNodes;
     private int curComboIndex;
 
-    private void Awake()
+    private void Start()
     {
         nodes = new List<QTENode>(NodesContainer.GetComponentsInChildren<QTENode>());
-        inputNodes = new List<QTENode>(InputNodesContainer.GetComponentsInChildren<QTENode>());
+        //inputNodes = new List<QTENode>(InputNodesContainer.GetComponentsInChildren<QTENode>());
         Hide();
     }
 
     public void Show(List<EmQTE> targets)
     { 
-        for (int i = 0; i < targets.Count; i++)
+        for (int i = 1; i <= targets.Count; i++)
         {
-            nodes[nodes.Count - i - 1].SetData(targets[i]);
+            nodes[nodes.Count - i].SetData(targets[targets.Count - i]);
         }
-        curComboIndex = inputNodes.Count - 1;
+        curComboIndex = nodes.Count - targets.Count;
     }
 
     public void Hide()
     {
         nodes.ForEach(node => node.Clear());
-        inputNodes.ForEach(node => node.Clear());
+        //inputNodes.ForEach(node => node.Clear());
     }
 
     public void OnInputCombo(EmQTE qte)
     {
-        nodes[curComboIndex--].Clear();        
+        nodes[curComboIndex++].Clear();        
     }
 }
