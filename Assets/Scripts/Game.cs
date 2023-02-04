@@ -49,6 +49,7 @@ public class Game : MonoBehaviour
     {
         comboNodes.Hide();
         qteManager.CutQte(damege);
+        vineManager.Cut(damege);
     }
 
     public void OnComboFail()

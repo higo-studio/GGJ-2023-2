@@ -145,6 +145,12 @@ public class Vine : SmartActor
 
     public EmVineState state { get; private set; }
 
+    public void Clear()
+    {
+        state = EmVineState.None;
+        gameObject.SetActive(false);
+    }
+
     public void BeenBorn()
     {
         state = EmVineState.Borning;

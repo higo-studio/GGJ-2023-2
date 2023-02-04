@@ -36,6 +36,6 @@ public class ComboNodes : MonoBehaviour
 
     public void OnInputCombo(EmQTE qte)
     {
-        inputNodes[curComboIndex--].SetData(qte);        
+        nodes[curComboIndex--].Clear();        
     }
 }

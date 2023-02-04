@@ -21,6 +21,7 @@ public class VineManager: MonoBehaviour
     {
         game = Game.instance;
         vineList = new List<Vine>(VineContainer.GetComponentsInChildren<Vine>());
+        vineList.ForEach(vine => { vine.Clear(); });
         VineCount = 0;
         for(var i = 0; i < InitVineNumber; i++)
         {
@@ -73,11 +74,11 @@ public class VineManager: MonoBehaviour
             if (BossHP <= 0)
                 game.CheckGameOver();
         }
-        VineCount -= distance;
         for (var i = 0; i < distance; i++)
         {
-            vineList[vineList.Count - i].BeenSlay();
+            vineList[vineList.Count - VineCount + i].BeenSlay();
         }
+        VineCount -= distance;
     }
 
     public int GetBossHP() { return BossHP; }
