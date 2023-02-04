@@ -24,9 +24,9 @@ public class QTEManager: MonoBehaviour
         { "Enter", EmQTE.Enter },
     };
 
-    [Header("ÞôÏÂ¿Õ¸ñºóµÄÁ¬´ò³ÖÐøÊ±¼ä")]
+    [Header("ï¿½ï¿½ï¿½Â¿Õ¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½")]
     public float ComboTime = 2.0f;
-    [Header("Á¬´òºóµÄCDÊ±¼ä")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½CDÊ±ï¿½ï¿½")]
     public float CdTime = 100.0f;
     private float currCdTime = 0.0f;
     public float remainCdTime { get { return Math.Clamp(CdTime - currCdTime, 0, CdTime); } }
@@ -186,7 +186,7 @@ public class QTEManager: MonoBehaviour
 
     public void DebugLog()
     {
-        Debug.Log(String.Join('¡¢', inputList.ToArray()));
+        //Debug.Log(String.Join('ï¿½ï¿½', inputList.ToArray()));
     }
 
     
