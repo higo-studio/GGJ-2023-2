@@ -99,25 +99,3 @@ jobs:
 
       - if: failure()
         run: echo '构建失败'
-  Notifitions-Succeed:
-    runs-on: ubuntu-latest
-    needs: buildForAllSupportedPlatforms
-    if: ${{ success() }}
-    steps:
-    - name: Feishu Notifitions - Success
-      uses: fjogeleit/http-request-action@v1
-      with:
-        url: 'https://open.feishu.cn/open-apis/bot/v2/hook/9148a5dd-fad7-44fe-9bb1-ac9e0b4cbbae'
-        method: 'POST'
-        data: '{ "msg_type": "text", "content": { "text": "出包成功\nhttps://github.com/higo-studio/hybrid/actions/runs/${{ github.run_id }}" } }'
-  Notifitions-Failed:
-    runs-on: ubuntu-latest
-    needs: buildForAllSupportedPlatforms
-    if: ${{ failure() }}
-    steps:
-    - name: Feishu Notifitions - Fail
-      uses: fjogeleit/http-request-action@v1
-      with:
-        url: 'https://open.feishu.cn/open-apis/bot/v2/hook/9148a5dd-fad7-44fe-9bb1-ac9e0b4cbbae'
-        method: 'POST'
-        data: '{ "msg_type": "text", "content": { "text": "出包失败\nhttps://github.com/higo-studio/hybrid/actions/runs/${{ github.run_id }}" } }'
