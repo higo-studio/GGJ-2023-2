@@ -1,0 +1,101 @@
+name: Build project
+
+on: 
+  push: 
+    branches:
+      - release
+  pull_request: 
+    branches:
+      - release
+  workflow_dispatch:
+#   schedule:
+#     - cron: '30 16 * * *'
+
+jobs:
+  buildForAllSupportedPlatforms:
+    name: Build for ${{ matrix.targetPlatform }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        targetPlatform:
+          # - StandaloneOSX # Build a macOS standalone (Intel 64-bit).
+          # - StandaloneWindows # Build a Windows standalone.
+          - StandaloneWindows64 # Build a Windows 64-bit standalone.
+          # - StandaloneLinux64 # Build a Linux 64-bit standalone.
+          # - iOS # Build an iOS player.
+          - Android # Build an Android .apk standalone app.
+          # - WebGL # WebGL.
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          lfs: true
+      - uses: actions/cache@v2
+        with:
+          path: hybrid-game/Library
+          key: Library-${{ matrix.targetPlatform }}
+          restore-keys: Library-
+      - uses: game-ci/unity-builder@v2.1.0
+        id: unityBuild
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          targetPlatform: ${{ matrix.targetPlatform }}
+          projectPath: "hybrid-game"
+          versioning: Semantic
+      
+      #universal
+      - name: Tar files
+        if: matrix.targetPlatform != 'StandaloneOSX'
+        env:
+          filename: hybrid-${{ steps.unityBuild.outputs.buildVersion }}-${{ matrix.targetPlatform }}
+        run: |
+          echo "out-filename=${filename}" >> $GITHUB_ENV
+          echo "out-filename-with-ext=${filename}.zip" >> $GITHUB_ENV
+          cd build
+          7z a ../${filename}.zip ./${{ matrix.targetPlatform }}/*
+
+      #mac only
+      - name: Tar files - Mac Only
+        if: matrix.targetPlatform == 'StandaloneOSX'
+        env:
+          filename: hybrid-${{ steps.unityBuild.outputs.buildVersion }}-${{ matrix.targetPlatform }}
+        run: |
+          echo "out-filename=${filename}" >> $GITHUB_ENV
+          echo "out-filename-with-ext=${filename}.tar.gz" >> $GITHUB_ENV
+          cd build
+          tar -pcvzf ../${filename}.tar.gz ./${{ matrix.targetPlatform }}
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: ${{ env.out-filename }}
+          path: ${{ env.out-filename-with-ext }}
+
+      # - uses: higo-studio/action-upload-qiniu@v0.0.1
+      #   with:
+      #     # Your qiniu access key, required.
+      #     access_key: ${{ secrets.QINIU_ACCESS_KEY }}
+
+      #     # Your qiniu secret key, required.
+      #     secret_key: ${{ secrets.QINIU_SECRET_KEY }}
+
+      #     # Bucket name, required.
+      #     bucket: ${{ secrets.QINIU_BUCKET }}
+
+      #     # The local directory (or file) you want to upload to bucket.
+      #     # Default: './'
+      #     source_dir: ${{ env.out-filename-with-ext }}
+
+      #     # The directory inside of the bucket you want to upload to, namely key prefix prepended to dest file key.
+      #     # Default: '/'
+      #     dest_dir: '/github-ci'
+
+      #     # Whether to ignore source maps.
+      #     # Default: true
+      #     ignore_source_map: true
+
+      - if: failure()
+        run: echo '构建失败'
