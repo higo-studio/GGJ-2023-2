@@ -9,7 +9,7 @@ using UnityEngine;
 
 public enum EmQTE 
 { 
-    UP = 0, DOWN = 1, Left = 2, Right = 3, Ready = 4, Enter = 5
+    UP = 0, DOWN = 1, Left = 2, Right = 3, Ready = 4, Enter = 5, None = -999
 }
 
 public class QTEManager: MonoBehaviour
@@ -28,23 +28,25 @@ public class QTEManager: MonoBehaviour
     public float ComboTime = 2.0f;
     [Header("连打后的CD时间")]
     public float CdTime = 100.0f;
+    public float currCdTime { get; private set; } = 0.0f;
 
-    public ArrayList qteList;                
-    public ArrayList inputList;              
+    public List<EmQTE> qteList { get; private set; }
+    public List<EmQTE> inputList { get; private set; }
     private int checkIndex;                  
     public bool isValid { get; private set; }
     public bool isComboing { get; private set; }
     public bool isWaitingCD { get; private set; }
 
+
     private QTEManager() {
         //qteList = new ArrayList();
-        qteList = new ArrayList
+        qteList = new List<EmQTE>
         {
             EmQTE.Left,
             EmQTE.Right,
             EmQTE.Right
         };
-        inputList = new ArrayList();
+        inputList = new List<EmQTE>();
         isValid = true;
     }
 
@@ -75,6 +77,7 @@ public class QTEManager: MonoBehaviour
         checkIndex = -1;
         isComboing = true;
         Invoke(nameof(ComboTimeOut), ComboTime);
+        Game.instance.OnStartBombo();
     }
 
     private void ComboTimeOut()
@@ -90,7 +93,21 @@ public class QTEManager: MonoBehaviour
     {
         isValid = false;
         isWaitingCD = true;
-        Invoke(nameof(CDTimeOut), CdTime);
+        this.currCdTime = 0;
+        //Invoke(nameof(CDTimeOut), CdTime);
+        StartCoroutine(nameof(CuntCd));
+    }
+
+
+    public IEnumerable CuntCd()
+    {
+        while(currCdTime < CdTime)
+        {
+            currCdTime += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+        currCdTime = 0;
+        CDTimeOut();
     }
 
     private void CDTimeOut()
@@ -149,14 +166,5 @@ public class QTEManager: MonoBehaviour
         Debug.Log(String.Join('、', inputList.ToArray()));
     }
 
-    public void Update()
-    {
-        if(isComboing)
-        {
-
-        }else if(isWaitingCD)
-        {
-
-        }
-    }
+    
 }
