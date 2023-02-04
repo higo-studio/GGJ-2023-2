@@ -19,6 +19,8 @@ public class PlayerInput : MonoBehaviour, IGameplayActions, IObserver<InputContr
     public static string s_LastDeviceSubType;
     public static event Action OnLastInputChanged;
 
+    IDisposable anyKeyDispable;
+
     protected void OnEnable()
     {
         actions.Enable();
@@ -34,13 +36,15 @@ public class PlayerInput : MonoBehaviour, IGameplayActions, IObserver<InputContr
     {
         actions = new PlayerInputActions();
         actions.Gameplay.SetCallbacks(this);
-        InputSystem.onAnyButtonPress.Subscribe(this);
+        anyKeyDispable = InputSystem.onAnyButtonPress.Subscribe(this);
     }
 
     void OnDestroy()
     {
         StopAllCoroutines();
         Gamepad.current.ResetHaptics();
+        if (anyKeyDispable != null)
+            anyKeyDispable.Dispose();
     }
 
     public void Vibrate(float duration, float low = 0.3f, float high = 0.5f)
@@ -64,7 +68,7 @@ public class PlayerInput : MonoBehaviour, IGameplayActions, IObserver<InputContr
         gamepad.SetMotorSpeeds(low, high);
 
         var time = Time.time;
-        while(Time.time - time < duration)
+        while (Time.time - time < duration)
         {
             yield return null;
         }
