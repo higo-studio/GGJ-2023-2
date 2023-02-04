@@ -85,6 +85,10 @@ public class Game : MonoBehaviour
 
     public void CheckGameOver()
     {
-
+        if(vineManager.VineCountOver)
+        {
+            Debug.Log("À¿¡À");
+            UnityEditor.EditorApplication.isPlaying= false;
+        }
     }
 }

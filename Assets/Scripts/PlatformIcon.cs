@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Timeline;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Image))]
@@ -45,6 +46,7 @@ public class PlatformIcon : MonoBehaviour
         m_cacheDeviceName = PlayerInput.s_LastDeviceDisplayName;
         m_cacheIconType = m_cacheIconType;
         Sprite sprite = null;
+        /*
         if (iconCollections.Map.TryGetValue(m_iconType, out var mapper))
         {
             var deviceName = PlayerInput.s_LastDeviceDisplayName;
@@ -76,6 +78,9 @@ public class PlatformIcon : MonoBehaviour
                 sprite = mapper.PlayStation;
             }
         }
+        */
+        if (iconCollections.Map.TryGetValue(m_iconType, out var mapper))
+            sprite = mapper.KeyBoardWASD;
         m_image.sprite = sprite;
     }
 #if UNITY_EDITOR

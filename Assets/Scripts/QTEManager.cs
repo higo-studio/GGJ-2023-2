@@ -41,15 +41,7 @@ public class QTEManager: MonoBehaviour
     private System.Random random;
 
     private QTEManager() {
-        //qteList = new ArrayList();
-        qteList = new List<EmQTE>
-        {
-            EmQTE.Left,
-            EmQTE.Right,
-            EmQTE.Right,
-            EmQTE.UP,
-            EmQTE.DOWN
-        };
+        qteList = new List<EmQTE>();
         inputList = new List<EmQTE>();
         isValid = true;
         random = new System.Random();

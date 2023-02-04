@@ -21,11 +21,11 @@ public class ComboNodes : MonoBehaviour
 
     public void Show(List<EmQTE> targets)
     { 
-        for (int i = 1; i <= targets.Count; i++)
+        for (int i = 0; i < targets.Count; i++)
         {
-            nodes[nodes.Count - i].SetData(targets[targets.Count - i]);
+            nodes[nodes.Count - i - 1].SetData(targets[i]);
         }
-        curComboIndex = inputNodes.Count - targets.Count - 1;
+        curComboIndex = inputNodes.Count - 1;
     }
 
     public void Hide()
@@ -36,6 +36,6 @@ public class ComboNodes : MonoBehaviour
 
     public void OnInputCombo(EmQTE qte)
     {
-        inputNodes[curComboIndex++].SetData(qte);        
+        inputNodes[curComboIndex--].SetData(qte);        
     }
 }

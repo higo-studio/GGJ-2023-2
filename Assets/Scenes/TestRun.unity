@@ -4471,7 +4471,7 @@ MonoBehaviour:
   BossHP: 20
   BornInterval: 5
   MaxVineCount: 8
-  InitVineNumber: 5
+  InitVineNumber: 6
   VineContainer: {fileID: 1654279959}
 --- !u!114 &709210126
 MonoBehaviour:
@@ -4485,8 +4485,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1579c7a87c5817145b8eed77c9dc5704, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ComboTime: 2
-  CdTime: 5
+  ComboTime: 999
+  CdTime: 3
 --- !u!114 &709210127
 MonoBehaviour:
   m_ObjectHideFlags: 0
