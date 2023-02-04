@@ -9,15 +9,17 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
 using static PlayerInputActions;
 
-public class PlayerInput : MonoBehaviour, IGameplayActions
+public class PlayerInput : MonoBehaviour, IGameplayActions, IObserver<InputControl>
 {
     private PlayerInputActions actions;
 
     private Coroutine m_vibrateCor;
-    public event Action<InputAction.CallbackContext> OnKeyChanged;
+    public event Action<string, InputAction.CallbackContext> OnKeyChanged;
     public static string s_LastDeviceDisplayName;
     public static string s_LastDeviceSubType;
     public static event Action OnLastInputChanged;
+
+    IDisposable anyKeyDispable;
 
     protected void OnEnable()
     {
@@ -34,12 +36,15 @@ public class PlayerInput : MonoBehaviour, IGameplayActions
     {
         actions = new PlayerInputActions();
         actions.Gameplay.SetCallbacks(this);
+        anyKeyDispable = InputSystem.onAnyButtonPress.Subscribe(this);
     }
 
     void OnDestroy()
     {
         StopAllCoroutines();
         Gamepad.current.ResetHaptics();
+        if (anyKeyDispable != null)
+            anyKeyDispable.Dispose();
     }
 
     public void Vibrate(float duration, float low = 0.3f, float high = 0.5f)
@@ -63,7 +68,7 @@ public class PlayerInput : MonoBehaviour, IGameplayActions
         gamepad.SetMotorSpeeds(low, high);
 
         var time = Time.time;
-        while(Time.time - time < duration)
+        while (Time.time - time < duration)
         {
             yield return null;
         }
@@ -73,34 +78,42 @@ public class PlayerInput : MonoBehaviour, IGameplayActions
 
     public void OnStart(InputAction.CallbackContext context)
     {
-        OnCommand(context);
+        OnKeyChanged?.Invoke("start", context);
     }
 
     public void OnUp(InputAction.CallbackContext context)
     {
-        OnCommand(context);
+        OnKeyChanged?.Invoke("up", context);
     }
 
     public void OnDown(InputAction.CallbackContext context)
     {
-        OnCommand(context);
+        OnKeyChanged?.Invoke("down", context);
     }
 
     public void OnLeft(InputAction.CallbackContext context)
     {
-        OnCommand(context);
+        OnKeyChanged?.Invoke("left", context);
     }
 
     public void OnRight(InputAction.CallbackContext context)
     {
-        OnCommand(context);
+        OnKeyChanged?.Invoke("right", context);
     }
 
-    public void OnCommand(InputAction.CallbackContext context)
+    public void OnCompleted()
     {
-        OnKeyChanged?.Invoke(context);
+        Debug.Log("OnComplete");
+    }
 
-        var device = context.control.device;
+    public void OnError(Exception error)
+    {
+        Debug.LogException(error);
+    }
+
+    public void OnNext(InputControl value)
+    {
+        var device = value.device;
         s_LastDeviceDisplayName = device.displayName;
         OnLastInputChanged?.Invoke();
     }

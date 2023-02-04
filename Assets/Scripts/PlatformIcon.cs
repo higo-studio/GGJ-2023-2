@@ -1,11 +1,10 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Image))]
-[ExecuteAlways]
 public class PlatformIcon : MonoBehaviour
 {
     private Image m_image;
@@ -22,6 +21,9 @@ public class PlatformIcon : MonoBehaviour
     }
     [SerializeField]
     private eIconType m_iconType;
+
+    private eIconType m_cacheIconType;
+    private string m_cacheDeviceName;
     void Awake()
     {
         m_image = GetComponent<Image>();
@@ -38,6 +40,10 @@ public class PlatformIcon : MonoBehaviour
     public void Refresh()
     {
         if (m_image == null) return;
+        if (m_cacheDeviceName == PlayerInput.s_LastDeviceDisplayName && m_cacheIconType == m_cacheIconType) return;
+
+        m_cacheDeviceName = PlayerInput.s_LastDeviceDisplayName;
+        m_cacheIconType = m_cacheIconType;
         Sprite sprite = null;
         if (iconCollections.Map.TryGetValue(m_iconType, out var mapper))
         {
@@ -50,6 +56,7 @@ public class PlatformIcon : MonoBehaviour
                         sprite = mapper.Xbox;
                         break;
                     case "Keyboard":
+                    case "Mouse":
                         sprite = mapper.KeyBoardWASD;
                         break;
                     case "PlayStation Controller":
@@ -59,6 +66,7 @@ public class PlatformIcon : MonoBehaviour
                         sprite = mapper.Switch;
                         break;
                     default:
+                        Debug.Log($"未找到适配的配置: {deviceName}");
                         sprite = mapper.KeyBoardWASD;
                         break;
                 }
