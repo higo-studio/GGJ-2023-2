@@ -16,12 +16,12 @@ public class QTEManager: MonoBehaviour
 {
     public static Hashtable name2EmQte = new Hashtable
     {
-        { "W", EmQTE.UP },
-        { "S", EmQTE.DOWN },
-        { "A", EmQTE.Left },
-        { "D", EmQTE.Right },
-        { "Ready", EmQTE.Ready },
-        { "Enter", EmQTE.Enter },
+        { "up", EmQTE.UP },
+        { "down", EmQTE.DOWN },
+        { "left", EmQTE.Left },
+        { "right", EmQTE.Right },
+        { "start", EmQTE.Ready },
+        { "enter", EmQTE.Enter },
     };
 
     [Header("���¿ո����������ʱ��")]

@@ -41,12 +41,11 @@ public class PlatformIcon : MonoBehaviour
     public async void Refresh()
     {
         if (m_image == null) return;
-        // if (m_cacheDeviceName == PlayerInput.s_LastDeviceDisplayName && m_cacheIconType == m_cacheIconType) return;
+         if (m_cacheDeviceName == PlayerInput.s_LastDeviceDisplayName && m_cacheIconType == m_iconType) return;
 
         m_cacheDeviceName = PlayerInput.s_LastDeviceDisplayName;
-        m_cacheIconType = m_cacheIconType;
+        m_cacheIconType = m_iconType;
         Sprite sprite = null;
-        /*
         if (iconCollections.Map.TryGetValue(m_iconType, out var mapper))
         {
             var deviceName = PlayerInput.s_LastDeviceDisplayName;
@@ -78,9 +77,6 @@ public class PlatformIcon : MonoBehaviour
                 sprite = mapper.PlayStation;
             }
         }
-        */
-        if (iconCollections.Map.TryGetValue(m_iconType, out var mapper))
-            sprite = mapper.KeyBoardWASD;
         m_image.sprite = sprite;
         if (sprite != null)
         {
