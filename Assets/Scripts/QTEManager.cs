@@ -75,6 +75,7 @@ public class QTEManager: MonoBehaviour
         if(cutNum >= qteList.Count)
         {
             qteList.Clear();
+            GenerateQte();
         }else
         {
             qteList.RemoveRange(0, cutNum);

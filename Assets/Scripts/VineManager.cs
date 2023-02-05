@@ -10,6 +10,7 @@ public class VineManager: MonoBehaviour
     public int MaxVineCount = 8;
     public int InitVineNumber = 5;
     public Transform VineContainer;
+    public BossTower tower;
     public int VineCount { get; set; }
 
     private Game game;
@@ -27,6 +28,11 @@ public class VineManager: MonoBehaviour
         {
             BornNewVine();
         }
+    }
+
+    private void Start()
+    {
+        BossHPChange();
     }
 
     public void Update()
@@ -76,6 +82,8 @@ public class VineManager: MonoBehaviour
         {
             distance = VineCount;
             BossHP -= damage;
+            tower.PlayHurt();
+            BossHPChange();
             if (BossHP <= 0)
                 game.CheckGameOver();
         }
@@ -87,4 +95,8 @@ public class VineManager: MonoBehaviour
     }
 
     public int GetBossHP() { return BossHP; }
+    public void BossHPChange() 
+    {
+        game.OnBossHPChange(BossHP);
+    }
 }

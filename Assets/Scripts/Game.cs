@@ -17,6 +17,7 @@ public class Game : MonoBehaviour
     public ComboNodes comboNodes;
     public LabelCD remainCD;
     public LabelComboTime remainCombo;
+    public LabelBossHP bossHp;
 
     public Game()
     {
@@ -104,8 +105,29 @@ public class Game : MonoBehaviour
     {
         if(vineManager.VineCountOver)
         {
-            Debug.Log("À¿¡À");
-            UnityEditor.EditorApplication.isPlaying= false;
+            Lose();
         }
+        if(vineManager.BossHP <= 0)
+        {
+            Win();
+        }
+    }
+
+    public void OnBossHPChange(int hp)
+    {
+        CheckGameOver();
+        bossHp.UpdateHP(hp);
+    }
+
+    public void Win()
+    {
+        Debug.Log("”Æ¡À");
+        UnityEditor.EditorApplication.isPlaying = false;
+    }
+
+    public void Lose()
+    {
+        Debug.Log("À¿¡À");
+        UnityEditor.EditorApplication.isPlaying = false;
     }
 }
