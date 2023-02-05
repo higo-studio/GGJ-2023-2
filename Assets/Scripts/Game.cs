@@ -21,6 +21,8 @@ public class Game : MonoBehaviour
     public Knight knight;
     public FinishPanel panel;
 
+    private bool isGameOver;
+
     public Game()
     {
         instance = this;
@@ -113,13 +115,16 @@ public class Game : MonoBehaviour
 
     public void CheckGameOver()
     {
-        if(vineManager.VineCountOver)
+        if (isGameOver) return;
+        if (vineManager.VineCountOver)
         {
             Lose();
+            isGameOver = true;
         }
         if(vineManager.BossHP <= 0)
         {
             Win();
+            isGameOver = true;
         }
     }
 
