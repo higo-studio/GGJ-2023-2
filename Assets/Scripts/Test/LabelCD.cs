@@ -15,7 +15,7 @@ public class LabelCD : MonoBehaviour
     void Update()
     {
         gameObject.SetActive(Game.instance.isComboCD);
-        text.text = Game.instance.comboRemainCDTime.ToString("0.0");
+        text.text = "CD:" + Game.instance.comboRemainCDTime.ToString("0.0");
     }
 
     public void SetActive(bool active)
