@@ -42,6 +42,8 @@ public class Knight : MonoBehaviour
     public void OnAttenEnd()
     {
         Idle();
+        AttackSfx();
+        CameraShake();
         StartCoroutine(MoveBack(originPos));
     }
 
