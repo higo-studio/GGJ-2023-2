@@ -94,6 +94,14 @@ public class VineManager: MonoBehaviour
         VineCount -= distance;
     }
 
+    public Vector3 GetTargetPos()
+    {
+        if (VineCount <= 0)
+            return tower.transform.position;
+        else
+            return vineList[vineList.Count - VineCount - 1].transform.position;
+    }
+
     public int GetBossHP() { return BossHP; }
     public void BossHPChange() 
     {

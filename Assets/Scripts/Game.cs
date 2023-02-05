@@ -1,3 +1,4 @@
+using Palmmedia.ReportGenerator.Core.Reporting.Builders;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -64,7 +65,7 @@ public class Game : MonoBehaviour
 
     public void KinghtAttack()
     {
-        knight.Attack();
+        knight.Attack(GetTargetPos());
     }
 
     public void OnComboFail()
@@ -159,6 +160,11 @@ public class Game : MonoBehaviour
     public void Lose()
     {
         Debug.Log("À¿¡À");
-        UnityEditor.EditorApplication.isPlaying = false;
+        //UnityEditor.EditorApplication.isPlaying = false;
+    }
+
+    public Vector3 GetTargetPos()
+    {
+        return vineManager.GetTargetPos();
     }
 }
