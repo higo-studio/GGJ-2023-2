@@ -91,5 +91,10 @@ public class Knight : MonoBehaviour
         Camera.main.DOShakePosition(0.1f, 3);
     }
 
+    public void AttackSfx()
+    {
+        Audio.ins.playAttack();
+    }
+
 
 }

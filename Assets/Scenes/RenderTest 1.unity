@@ -18865,3 +18865,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3885836066103301783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3885836066103301781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d6f1e925daffac4f97373e99ce34b3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Win: {fileID: 8300000, guid: 2667a0a008b044e218b63df62e2be749, type: 3}
+  Lose: {fileID: 8300000, guid: df729d213c4be44a9b55cd109f5cd4f9, type: 3}
+  Scream: {fileID: 8300000, guid: 9bf2ee531d2f9dc4586153df82887838, type: 3}
+  Attack: {fileID: 8300000, guid: 9621e2b4d46c606459b25c270a60d9e2, type: 3}
