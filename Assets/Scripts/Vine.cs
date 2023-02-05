@@ -143,12 +143,18 @@ public class Vine : SmartActor
 
     //////////////////////////////////////////////////////// ·Ö¸î paoMian //////////////////////////////////////////////////////////////
 
+    public DestroyPartical destroyParticle;
     public EmVineState state { get; private set; }
+
+    private void Awake()
+    {
+        destroyParticle.vine = this;
+    }
 
     public void Clear()
     {
         state = EmVineState.None;
-        gameObject.SetActive(false);
+        gameObject.SetActive(false);   
     }
 
     public void BeenBorn()
@@ -166,18 +172,23 @@ public class Vine : SmartActor
     public void BeenSlay()
     {
         state = EmVineState.Dying;
-        // TODO  callback  ( Animation    to None    gameObject.SetActive )
-        gameObject.SetActive(false);
+        // TODO  callback  ( Animation    to None    gameObject.SetActive 
+        destroyParticle.Play();
     }
 
     public void TimeOut()
     {
-
+        
     }
 
     public void Resume()
     {
 
+    }
+
+    public void OndestroyPlayEnd()
+    {
+        Clear();
     }
 }
 
