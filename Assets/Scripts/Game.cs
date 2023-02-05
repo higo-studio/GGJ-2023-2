@@ -19,6 +19,7 @@ public class Game : MonoBehaviour
     public LabelBossHP bossHp;
     public UIHPBar bossHPBar;
     public Knight knight;
+    public FinishPanel panel;
 
     public Game()
     {
@@ -152,12 +153,24 @@ public class Game : MonoBehaviour
     public void Win()
     {
         Debug.Log("”Æ¡À");
-        SceneManager.LoadScene("Launch");
+        if (panel != null)
+        {
+            var qteInput = qteManager.GetComponent<QTEInput>();
+            qteInput.enabled = false;
+            panel.input = qteInput.playerInput;
+            panel.init(true);
+        }
     }
 
     public void Lose()
     {
         Debug.Log("À¿¡À");
-        SceneManager.LoadScene("Launch");
+        if (panel != null)
+        {
+            var qteInput = qteManager.GetComponent<QTEInput>();
+            qteInput.enabled = false;
+            panel.input = qteInput.playerInput;
+            panel.init(false);
+        }
     }
 }

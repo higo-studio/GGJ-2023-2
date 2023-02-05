@@ -13,10 +13,18 @@ public class QTEInput : MonoBehaviour
     private void Awake()
     {
         manager = GetComponent<QTEManager>();
-        playerInput.OnKeyChanged += OnKeyChanged;
     }
 
     void OnDestroy()
+    {
+    }
+
+    private void OnEnable()
+    {
+        playerInput.OnKeyChanged += OnKeyChanged;
+    }
+
+    private void OnDisable()
     {
         playerInput.OnKeyChanged -= OnKeyChanged;
     }

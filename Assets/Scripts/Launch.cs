@@ -32,7 +32,7 @@ public class Launch : MonoBehaviour
 
     private void OnKeyChanged(string arg1, InputAction.CallbackContext arg2)
     {
-        if (arg1 == "start")
+        if (arg1 == "down")
         {
             SceneManager.LoadScene(nextScene);
         }
