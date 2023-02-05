@@ -155,7 +155,9 @@ public class Game : MonoBehaviour
         Debug.Log("”Æ¡À");
         if (panel != null)
         {
-            panel.input = qteManager.GetComponent<QTEInput>().playerInput;
+            var qteInput = qteManager.GetComponent<QTEInput>();
+            qteInput.enabled = false;
+            panel.input = qteInput.playerInput;
             panel.init(true);
         }
     }
@@ -165,7 +167,9 @@ public class Game : MonoBehaviour
         Debug.Log("À¿¡À");
         if (panel != null)
         {
-            panel.input = qteManager.GetComponent<QTEInput>().playerInput;
+            var qteInput = qteManager.GetComponent<QTEInput>();
+            qteInput.enabled = false;
+            panel.input = qteInput.playerInput;
             panel.init(false);
         }
     }
