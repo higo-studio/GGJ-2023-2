@@ -61,6 +61,7 @@ public class PlatformIcon : MonoBehaviour
                         sprite = mapper.KeyBoardWASD;
                         break;
                     case "PlayStation Controller":
+                    case "DualSense Wireless Controller":
                         sprite = mapper.PlayStation;
                         break;
                     case "Switch Pro Controller":
