@@ -7,7 +7,7 @@
             "actions": [
                 {
                     "name": "Start",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "5baea4e7-6e31-482e-b80d-47b6a8d08a3f",
                     "expectedControlType": "Button",
                     "processors": "",
