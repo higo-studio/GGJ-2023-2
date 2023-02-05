@@ -64,7 +64,7 @@ public class Game : MonoBehaviour
 
     public void KinghtAttack()
     {
-        knight.Attack();
+        knight.Attack(vineManager.GetTargetPos());
     }
 
     public void OnComboFail()
