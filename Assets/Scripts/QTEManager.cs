@@ -142,6 +142,7 @@ public class QTEManager: MonoBehaviour
 
     public void InputQTE(EmQTE qte)
     {
+        Debug.Log(qte);
         if (inputList.Count <= 0 && qte != EmQTE.Ready)
             return;
         if (inputList.Count == 0 && qte == EmQTE.Ready)

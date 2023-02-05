@@ -27,9 +27,12 @@ public class QTEInput : MonoBehaviour
         if (!manager.isValid)
             return;
 
-        if (arg1 == "start" && context.phase == InputActionPhase.Canceled)
+        if (arg1 == "start")
         {
-            manager.InputQTE(EmQTE.Enter);
+            if (context.phase == InputActionPhase.Started)
+                manager.InputQTE(EmQTE.Ready);
+            else if (context.phase == InputActionPhase.Canceled)
+                manager.InputQTE(EmQTE.Enter);
         }
         else if (context.phase == InputActionPhase.Started)
         {
