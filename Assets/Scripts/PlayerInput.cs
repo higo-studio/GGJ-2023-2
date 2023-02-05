@@ -42,7 +42,7 @@ public class PlayerInput : MonoBehaviour, IGameplayActions, IObserver<InputContr
     void OnDestroy()
     {
         StopAllCoroutines();
-        Gamepad.current.ResetHaptics();
+        Gamepad.current?.ResetHaptics();
         if (anyKeyDispable != null)
             anyKeyDispable.Dispose();
     }
