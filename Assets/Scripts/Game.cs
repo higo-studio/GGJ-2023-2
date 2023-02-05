@@ -1,8 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class Game : MonoBehaviour
 {
@@ -153,12 +152,12 @@ public class Game : MonoBehaviour
     public void Win()
     {
         Debug.Log("”Æ¡À");
-        UnityEditor.EditorApplication.isPlaying = false;
+        SceneManager.LoadScene("Launch");
     }
 
     public void Lose()
     {
         Debug.Log("À¿¡À");
-        UnityEditor.EditorApplication.isPlaying = false;
+        SceneManager.LoadScene("Launch");
     }
 }

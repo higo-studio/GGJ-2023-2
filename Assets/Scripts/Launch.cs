@@ -36,6 +36,14 @@ public class Launch : MonoBehaviour
         {
             SceneManager.LoadScene(nextScene);
         }
+        else if (arg1 == "right")
+        {
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.Exit(0);
+#else
+            Application.Quit();
+#endif
+        }
     }
 
 }
