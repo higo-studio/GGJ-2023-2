@@ -152,25 +152,27 @@ public class Game : MonoBehaviour
 
     public void Win()
     {
-        Debug.Log("Ó®ÁË");
+        Debug.Log("Ó®ï¿½ï¿½");
         if (panel != null)
         {
             var qteInput = qteManager.GetComponent<QTEInput>();
             qteInput.enabled = false;
             panel.input = qteInput.playerInput;
             panel.init(true);
+            Audio.ins.playWin();
         }
     }
 
     public void Lose()
     {
-        Debug.Log("ËÀÁË");
+        Debug.Log("ï¿½ï¿½ï¿½ï¿½");
         if (panel != null)
         {
             var qteInput = qteManager.GetComponent<QTEInput>();
             qteInput.enabled = false;
             panel.input = qteInput.playerInput;
             panel.init(false);
+            Audio.ins.playLose();
         }
     }
 }

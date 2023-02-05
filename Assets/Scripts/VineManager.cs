@@ -31,6 +31,8 @@ public class VineManager : MonoBehaviour
     private bool timeOut;
     private int speedUpGenerateCount = 0;
 
+    private bool screamFlag = false;
+
     private void Awake()
     {
         game = Game.instance;
@@ -46,6 +48,7 @@ public class VineManager : MonoBehaviour
     private void Start()
     {
         BossHPChange();
+        screamFlag = false;
     }
 
     public void Update()
@@ -98,6 +101,12 @@ public class VineManager : MonoBehaviour
         if (VineCountOver)
             return;                         // GameOver
         vineList[vineList.Count - VineCount].BeenBorn();
+
+        if (VineCount/MaxVineCount>=0.7f&&!screamFlag)
+        {
+            Audio.ins.playScream();
+            screamFlag = true;
+        }
     }
 
     public bool VineCountOver { get { return VineCount >= vineList.Count; } }
