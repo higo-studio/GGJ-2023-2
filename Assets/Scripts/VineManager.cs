@@ -13,7 +13,7 @@ public struct MinMaxRange
     public int Value => UnityEngine.Random.Range(min, max);
 }
 
-public class VineManager: MonoBehaviour
+public class VineManager : MonoBehaviour
 {
     public int BossHP = 20;
     public float BornInterval = 5;
@@ -22,7 +22,7 @@ public class VineManager: MonoBehaviour
     public Transform VineContainer;
     public BossTower tower;
     public MinMaxRange generateCountWhenBossHit;
-    
+
     public int VineCount { get; set; }
 
     private Game game;
@@ -37,7 +37,7 @@ public class VineManager: MonoBehaviour
         vineList = new List<Vine>(VineContainer.GetComponentsInChildren<Vine>());
         vineList.ForEach(vine => { vine.Clear(); });
         VineCount = 0;
-        for(var i = 0; i < InitVineNumber; i++)
+        for (var i = 0; i < InitVineNumber; i++)
         {
             BornNewVine();
         }
@@ -50,7 +50,7 @@ public class VineManager: MonoBehaviour
 
     public void Update()
     {
-        if(timeOut)
+        if (timeOut)
             return;
         currBornTime += Time.deltaTime;
         if (speedUpGenerateCount > 0)
@@ -66,7 +66,7 @@ public class VineManager: MonoBehaviour
         }
         else
         {
-            if(currBornTime >= BornInterval)
+            if (currBornTime >= BornInterval)
             {
                 currBornTime -= BornInterval;
                 BornNewVine();
@@ -108,13 +108,13 @@ public class VineManager: MonoBehaviour
         if (damage >= VineCount)
         {
             distance = VineCount;
-            BossHP -= damage;
+            BossHP -= (int)Mathf.Pow(1.5f, damage);
             tower.PlayHurt();
             BossHPChange();
             if (BossHP <= 0)
                 game.CheckGameOver();
 
-            speedUpGenerateCount = generateCountWhenBossHit.Value; 
+            speedUpGenerateCount = generateCountWhenBossHit.Value;
         }
         for (var i = 0; i < distance; i++)
         {
@@ -124,7 +124,7 @@ public class VineManager: MonoBehaviour
     }
 
     public int GetBossHP() { return BossHP; }
-    public void BossHPChange() 
+    public void BossHPChange()
     {
         game.OnBossHPChange(BossHP);
     }

@@ -11239,14 +11239,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 588fd63d631fa4449972140cf4643ebe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BossHP: 20
-  BornInterval: 2
+  BossHP: 100
+  BornInterval: 1.5
   MaxVineCount: 8
-  InitVineNumber: 6
+  InitVineNumber: 4
   VineContainer: {fileID: 1654279959}
   tower: {fileID: 275734673}
   generateCountWhenBossHit:
-    min: 2
+    min: 4
     max: 6
 --- !u!114 &964159104
 MonoBehaviour:
@@ -11260,7 +11260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1579c7a87c5817145b8eed77c9dc5704, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ComboTime: 999
+  ComboTime: 10
   CdTime: 3
 --- !u!114 &964159105
 MonoBehaviour:
