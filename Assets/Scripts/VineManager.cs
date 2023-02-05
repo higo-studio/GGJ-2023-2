@@ -2,6 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using UnityEngine;
+using System;
+
+[Serializable]
+public struct MinMaxRange
+{
+    public int min;
+    public int max;
+
+    public int Value => UnityEngine.Random.Range(min, max);
+}
 
 public class VineManager: MonoBehaviour
 {
@@ -11,12 +21,15 @@ public class VineManager: MonoBehaviour
     public int InitVineNumber = 5;
     public Transform VineContainer;
     public BossTower tower;
+    public MinMaxRange generateCountWhenBossHit;
+    
     public int VineCount { get; set; }
 
     private Game game;
     private List<Vine> vineList;
     private float currBornTime = 0;
     private bool timeOut;
+    private int speedUpGenerateCount = 0;
 
     private void Awake()
     {
@@ -40,10 +53,24 @@ public class VineManager: MonoBehaviour
         if(timeOut)
             return;
         currBornTime += Time.deltaTime;
-        if(currBornTime >= BornInterval)
+        if (speedUpGenerateCount > 0)
         {
-            currBornTime = 0;
-            BornNewVine();
+            var interval = BornInterval / 3f;
+            if (currBornTime > interval)
+            {
+                speedUpGenerateCount--;
+                currBornTime -= interval;
+                Debug.Log("Born Quick");
+                BornNewVine();
+            }
+        }
+        else
+        {
+            if(currBornTime >= BornInterval)
+            {
+                currBornTime -= BornInterval;
+                BornNewVine();
+            }
         }
     }
 
@@ -86,6 +113,8 @@ public class VineManager: MonoBehaviour
             BossHPChange();
             if (BossHP <= 0)
                 game.CheckGameOver();
+
+            speedUpGenerateCount = generateCountWhenBossHit.Value; 
         }
         for (var i = 0; i < distance; i++)
         {

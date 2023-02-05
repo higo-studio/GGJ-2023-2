@@ -11230,7 +11230,7 @@ MonoBehaviour:
   tower: {fileID: 275734673}
   generateCountWhenBossHit:
     min: 2
-    max: 5
+    max: 6
 --- !u!114 &964159104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11639,8 +11639,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 849462041}
   - {fileID: 1287636342}
+  - {fileID: 849462041}
   - {fileID: 1552123983}
   - {fileID: 429687937}
   - {fileID: 1977646729}
@@ -13613,7 +13613,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1068054493}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

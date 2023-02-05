@@ -159,9 +159,11 @@ public class Vine : SmartActor
 
     public void BeenBorn()
     {
+        Clear();
         state = EmVineState.Borning;
         gameObject.SetActive(true);
         // TODO Animation
+        Debug.Log("Benn Born");
     }
 
     public void Idle()
@@ -188,7 +190,8 @@ public class Vine : SmartActor
 
     public void OndestroyPlayEnd()
     {
-        Clear();
+        if (state == EmVineState.Dying)
+            Clear();
     }
 }
 
