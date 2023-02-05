@@ -18,6 +18,7 @@ public class Game : MonoBehaviour
     public LabelCD remainCD;
     public LabelComboTime remainCombo;
     public LabelBossHP bossHp;
+    public Knight knight;
 
     public Game()
     {
@@ -34,7 +35,7 @@ public class Game : MonoBehaviour
 
     public void HeroAttack(int damage)
     {
-            
+        
     }
 
     public List<EmQTE> GetQTEList()
@@ -47,6 +48,7 @@ public class Game : MonoBehaviour
         comboNodes.Show(GetQTEList());
         vineManager.TimeOut();
         ShowRemainCombo();
+        knight.Hold();
     }
 
     public void OnComboFinish(int damege)
@@ -56,12 +58,19 @@ public class Game : MonoBehaviour
         vineManager.Cut(damege);
         // TODO Animation Callback stop
         vineManager.Resume(true);
+        KinghtAttack();
+    }
+
+    public void KinghtAttack()
+    {
+        knight.Attack();
     }
 
     public void OnComboFail()
     {
         comboNodes.Hide();
         vineManager.Resume();
+        knight.Idle();
     }
 
     public void OnInputCombo(EmQTE qte)
