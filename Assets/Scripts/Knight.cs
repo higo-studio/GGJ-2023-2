@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 [RequireComponent(typeof(Animator))]
 public class Knight : MonoBehaviour
@@ -42,6 +43,11 @@ public class Knight : MonoBehaviour
         targetPos.y = transform.position.y;
         Vector3.Lerp(transform.position, targetPos, MoveSpeed);
         yield return null;
+    }
+
+    public void CameraShake()
+    {
+        Camera.main.DOShakePosition(0.1f, 3);
     }
 
 
