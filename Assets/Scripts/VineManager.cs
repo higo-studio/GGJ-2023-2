@@ -2,8 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using UnityEngine;
+using System;
 
-public class VineManager: MonoBehaviour
+[Serializable]
+public struct MinMaxRange
+{
+    public int min;
+    public int max;
+
+    public int Value => UnityEngine.Random.Range(min, max);
+}
+
+public class VineManager : MonoBehaviour
 {
     public int BossHP = 20;
     public float BornInterval = 5;
@@ -11,12 +21,15 @@ public class VineManager: MonoBehaviour
     public int InitVineNumber = 5;
     public Transform VineContainer;
     public BossTower tower;
+    public MinMaxRange generateCountWhenBossHit;
+
     public int VineCount { get; set; }
 
     private Game game;
     private List<Vine> vineList;
     private float currBornTime = 0;
     private bool timeOut;
+    private int speedUpGenerateCount = 0;
 
     private void Awake()
     {
@@ -24,7 +37,7 @@ public class VineManager: MonoBehaviour
         vineList = new List<Vine>(VineContainer.GetComponentsInChildren<Vine>());
         vineList.ForEach(vine => { vine.Clear(); });
         VineCount = 0;
-        for(var i = 0; i < InitVineNumber; i++)
+        for (var i = 0; i < InitVineNumber; i++)
         {
             BornNewVine();
         }
@@ -37,13 +50,27 @@ public class VineManager: MonoBehaviour
 
     public void Update()
     {
-        if(timeOut)
+        if (timeOut)
             return;
         currBornTime += Time.deltaTime;
-        if(currBornTime >= BornInterval)
+        if (speedUpGenerateCount > 0)
         {
-            currBornTime = 0;
-            BornNewVine();
+            var interval = BornInterval / 3f;
+            if (currBornTime > interval)
+            {
+                speedUpGenerateCount--;
+                currBornTime -= interval;
+                Debug.Log("Born Quick");
+                BornNewVine();
+            }
+        }
+        else
+        {
+            if (currBornTime >= BornInterval)
+            {
+                currBornTime -= BornInterval;
+                BornNewVine();
+            }
         }
     }
 
@@ -81,11 +108,13 @@ public class VineManager: MonoBehaviour
         if (damage >= VineCount)
         {
             distance = VineCount;
-            BossHP -= damage;
+            BossHP -= (int)Mathf.Pow(1.5f, damage);
             tower.PlayHurt();
             BossHPChange();
             if (BossHP <= 0)
                 game.CheckGameOver();
+
+            speedUpGenerateCount = generateCountWhenBossHit.Value;
         }
         for (var i = 0; i < distance; i++)
         {
@@ -103,7 +132,7 @@ public class VineManager: MonoBehaviour
     }
 
     public int GetBossHP() { return BossHP; }
-    public void BossHPChange() 
+    public void BossHPChange()
     {
         game.OnBossHPChange(BossHP);
     }

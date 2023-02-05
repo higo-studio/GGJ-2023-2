@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public enum EmVineState
 {
@@ -159,9 +157,11 @@ public class Vine : SmartActor
 
     public void BeenBorn()
     {
+        Clear();
         state = EmVineState.Borning;
         gameObject.SetActive(true);
         // TODO Animation
+        Debug.Log("Benn Born");
     }
 
     public void Idle()
@@ -188,7 +188,8 @@ public class Vine : SmartActor
 
     public void OndestroyPlayEnd()
     {
-        Clear();
+        if (state == EmVineState.Dying)
+            Clear();
     }
 }
 

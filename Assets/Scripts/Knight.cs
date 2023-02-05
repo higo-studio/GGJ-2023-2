@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using DG.Tweening;
 using static UnityEditor.PlayerSettings;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 
@@ -85,6 +86,10 @@ public class Knight : MonoBehaviour
         }
     }
 
-   
+    public void CameraShake()
+    {
+        Camera.main.DOShakePosition(0.1f, 3);
+    }
+
 
 }

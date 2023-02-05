@@ -1,9 +1,7 @@
-using Palmmedia.ReportGenerator.Core.Reporting.Builders;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class Game : MonoBehaviour
 {
@@ -21,6 +19,7 @@ public class Game : MonoBehaviour
     public LabelBossHP bossHp;
     public UIHPBar bossHPBar;
     public Knight knight;
+    public FinishPanel panel;
 
     public Game()
     {
@@ -65,7 +64,7 @@ public class Game : MonoBehaviour
 
     public void KinghtAttack()
     {
-        knight.Attack(GetTargetPos());
+        knight.Attack();
     }
 
     public void OnComboFail()
@@ -154,17 +153,24 @@ public class Game : MonoBehaviour
     public void Win()
     {
         Debug.Log("”Æ¡À");
-        UnityEditor.EditorApplication.isPlaying = false;
+        if (panel != null)
+        {
+            var qteInput = qteManager.GetComponent<QTEInput>();
+            qteInput.enabled = false;
+            panel.input = qteInput.playerInput;
+            panel.init(true);
+        }
     }
 
     public void Lose()
     {
         Debug.Log("À¿¡À");
-        //UnityEditor.EditorApplication.isPlaying = false;
-    }
-
-    public Vector3 GetTargetPos()
-    {
-        return vineManager.GetTargetPos();
+        if (panel != null)
+        {
+            var qteInput = qteManager.GetComponent<QTEInput>();
+            qteInput.enabled = false;
+            panel.input = qteInput.playerInput;
+            panel.init(false);
+        }
     }
 }

@@ -8,6 +8,7 @@ public class StylizerRenderFeature : ScriptableRendererFeature
     CustomRenderPass m_ScriptablePass;
     Stylizer stylizer;
 
+
     public override void Create()
     {
         m_ScriptablePass = new CustomRenderPass();
@@ -37,6 +38,8 @@ public class StylizerRenderFeature : ScriptableRendererFeature
         Stylizer stylizer;
         Camera camera;
         RenderTargetIdentifier currentTarget;
+        public Material ub;
+
 
         private static readonly int DitherID = Shader.PropertyToID("_DitherID");
         private static readonly int GrainID = Shader.PropertyToID("_GrainID");
