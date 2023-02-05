@@ -8,22 +8,22 @@ public class Audio : MonoBehaviour
 {
     public static AudioSource Audiosrc;
 
-    private static AudioClip ScreamAudio;
+    private static AudioClip AudioClip;
     //private static AudioClip nameAudio;
    
 
     private void Start()
     {
         Audiosrc = GetComponent<AudioSource>();
-        ScreamAudio= Resources.Load<AudioClip>("scream");
+        
         //ScreamAudio= Resources.Load<AudioClip>("name");
     }
-    public static void AudioPlayer(string audioname)
+    public static void AudioPlayer(string audioname,int mode)
     {
         switch(audioname)
         {
             case "scream":
-                Audiosrc.clip = Resources.Load<AudioClip>("name");
+                AudioClip = Resources.Load<AudioClip>("name");
                 break;
             /*   
                  case "name":
@@ -32,7 +32,19 @@ public class Audio : MonoBehaviour
             */
             
         }
-        Audiosrc.Play();
+
+        switch (mode)
+        {
+            case 1:
+                Audiosrc.PlayOneShot(AudioClip);
+                break;
+            case 2:
+                Audiosrc.Stop();
+                break;
+            case 3:
+                Audiosrc.Pause();
+                break;
+        }
     }
    
         
