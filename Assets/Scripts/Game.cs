@@ -18,6 +18,7 @@ public class Game : MonoBehaviour
     public LabelCD remainCD;
     public LabelComboTime remainCombo;
     public LabelBossHP bossHp;
+    public UIHPBar bossHPBar;
 
     public Game()
     {
@@ -117,6 +118,27 @@ public class Game : MonoBehaviour
     {
         CheckGameOver();
         bossHp.UpdateHP(hp);
+
+        if (bossHPBar != null)
+        {
+            if (bossHPBar.MaxHp == 0)
+            {
+                bossHPBar.CurrentHp = bossHPBar.MaxHp = hp;
+                bossHPBar.Awake();
+            }
+            else
+            {
+                var delta = bossHPBar.CurrentHp - hp;
+                if (delta > 0)
+                {
+                    bossHPBar.UIHPDamage(delta);
+                }
+                else
+                {
+                    bossHPBar.UIHPHeal(-delta);
+                }
+            }
+        }
     }
 
     public void Win()
