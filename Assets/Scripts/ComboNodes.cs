@@ -30,12 +30,12 @@ public class ComboNodes : MonoBehaviour
 
     public void Hide()
     {
-        nodes.ForEach(node => node.Clear());
+        nodes.ForEach(node => node.Clear(0));
         //inputNodes.ForEach(node => node.Clear());
     }
 
     public void OnInputCombo(EmQTE qte)
     {
-        nodes[curComboIndex++].Clear();        
+        nodes[curComboIndex++].Clear(curComboIndex);        
     }
 }

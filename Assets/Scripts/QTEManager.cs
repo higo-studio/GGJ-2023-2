@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using DG.Tweening;
 
 
 public enum EmQTE 
@@ -30,6 +32,12 @@ public class QTEManager: MonoBehaviour
     public float remainCdTime { get { return Math.Clamp(CdTime - currCdTime, 0, CdTime); } }
     public float remainComboTime { get { return Math.Clamp(ComboTime - currComboTime, 0, ComboTime); } }
 
+    [SerializeField]
+    private GameObject startBtn;
+    [SerializeField]
+    private Vector3 StartBtnPos;
+
+
     public List<EmQTE> qteList { get; private set; }
     public List<EmQTE> inputList { get; private set; }
     private int checkIndex;                  
@@ -49,6 +57,11 @@ public class QTEManager: MonoBehaviour
     public void SetGameInstance(Game instance)
     {
         game = instance;
+    }
+
+    private void Start()
+    {
+        StartBtnPos = startBtn.transform.position;
     }
 
     public void GenerateQte()
@@ -84,9 +97,11 @@ public class QTEManager: MonoBehaviour
     {
         checkIndex = -1;
         isComboing = true;
+        SBPress();
         currComboTime = 0;
         StartCoroutine("CuntCombo");
         game.OnStartBombo();
+
     }
 
     private IEnumerator CuntCombo()
@@ -105,6 +120,7 @@ public class QTEManager: MonoBehaviour
         if (!isComboing)
             return;
         isComboing = false;
+        SBRelease();
         FinishCombo();
         Debug.Log("TimeOut");
     }
@@ -159,11 +175,13 @@ public class QTEManager: MonoBehaviour
         if (inputList.Count > 2 && (EmQTE)inputList[inputList.Count - 1] == EmQTE.Enter)
         {
             FinishCombo();
+            SBRelease();
             return;
         }
         if (checkIndex >= qteList.Count || (EmQTE)qteList[checkIndex] != (EmQTE)inputList[inputList.Count - 1])
         {
             ComboFail();
+            SBRelease();
             return;
         }
         checkIndex++;
@@ -173,6 +191,7 @@ public class QTEManager: MonoBehaviour
     private void ComboFail()
     {
         isComboing = false;
+        startBtn.GetComponent<Image>().color = Color.white;
         inputList.Clear();
         StartCd();
         game.OnComboFail();
@@ -187,11 +206,25 @@ public class QTEManager: MonoBehaviour
         StartCd();                                               
         //RefreshQte();
         game.OnComboFinish(comboLenth);
+
     }
 
     public void DebugLog()
     {
         //Debug.Log(String.Join('��', inputList.ToArray()));
+    }
+
+    private void SBPress()
+    {
+        startBtn.GetComponent<Image>().color = new Color(0.7f, 0.7f, 0.7f, 0.7f);
+        startBtn.transform.DOShakePosition(0.1f,5f).SetLoops(-1);
+    }
+
+    private void SBRelease()
+    {
+        startBtn.GetComponent<Image>().color = Color.white;
+        startBtn.transform.DOKill();
+        startBtn.transform.position = StartBtnPos;
     }
 
     
